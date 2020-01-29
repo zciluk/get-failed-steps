@@ -1,16 +1,10 @@
 import React, { useState } from "react";
-import {
-  Segment,
-  Input,
-  Grid,
-  GridColumn,
-  Table,
-  Button,
-  Message
-} from "semantic-ui-react";
+import { Segment, Grid, GridColumn, Message } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import API from "../../apis";
 import Spinner from "../Spinner";
+import StepsTable from "../StepsTable";
+import FormHeader from "../FormHeader";
 
 function App() {
   const [state, setState] = useState({
@@ -135,84 +129,19 @@ function App() {
   };
   return (
     <Segment>
-      <Segment inverted color="teal">
-        <Grid divided="vertically">
-          <Grid.Row columns={3}>
-            <GridColumn>
-              <Input
-                icon="gitlab"
-                name="projectID"
-                value={state.projectID}
-                onChange={handleChange}
-                placeholder="Project ID"
-                label={{ basic: true, content: "Project ID" }}
-                labelPosition="left"
-              />
-            </GridColumn>
-            <GridColumn>
-              <Input
-                icon="key"
-                name="apiKey"
-                value={state.apiKey}
-                onChange={handleChange}
-                placeholder="API key"
-                label={{ basic: true, content: "API key" }}
-                labelPosition="left"
-              />
-            </GridColumn>
-            <GridColumn>
-              <Input
-                icon="clock"
-                name="selectedDate"
-                value={state.selectedDate}
-                onChange={handleChange}
-                placeholder="Selected Day"
-                label={{ basic: true, content: "Day to check" }}
-                labelPosition="left"
-                type="date"
-              />
-            </GridColumn>
-          </Grid.Row>
-          <Grid.Row columns="2">
-            <GridColumn>
-              {}
-              <Button onClick={searchCall} color="black">
-                Get results
-              </Button>
-            </GridColumn>
-            <GridColumn></GridColumn>
-          </Grid.Row>
-        </Grid>
-      </Segment>
+      <FormHeader
+        projectID={state.projectID}
+        apiKey={state.apiKey}
+        selectedDate={state.selectedDate}
+        handleChange={handleChange}
+        searchCall={searchCall}
+      ></FormHeader>
       <Grid columns="equal">
         <GridColumn width="8">
           {!state.isError &&
             !state.isSearching &&
             state.displayedData.length !== 0 && (
-              <Table collapsing color="teal">
-                <Table.Header>
-                  <Table.Row>
-                    <Table.HeaderCell>Name of test</Table.HeaderCell>
-                    <Table.HeaderCell>Number of Fails</Table.HeaderCell>
-                  </Table.Row>
-                </Table.Header>
-
-                <Table.Body>
-                  {state.displayedData
-                    .filter((item, i, ar) => ar.indexOf(item) === i)
-                    .map(rowData => (
-                      <Table.Row>
-                        <Table.Cell>{rowData}</Table.Cell>
-                        <Table.Cell>
-                          {
-                            state.displayedData.filter(x => x === rowData)
-                              .length
-                          }
-                        </Table.Cell>
-                      </Table.Row>
-                    ))}
-                </Table.Body>
-              </Table>
+              <StepsTable displayedData={state.displayedData}></StepsTable>
             )}
           {state.isError && (
             <Message negative>
