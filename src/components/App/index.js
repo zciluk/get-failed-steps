@@ -160,22 +160,25 @@ function App() {
         </Grid>
       </Segment>
       {!state.isError && state.displayedData.length !== 0 && (
-        <Table color="teal">
+        <Table collapsing color="teal">
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Name of test</Table.HeaderCell>
               <Table.HeaderCell>Number of Fails</Table.HeaderCell>
-              <Table.HeaderCell>Test folder</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 
           <Table.Body>
-            {state.displayedData.map(rowData => (
-              <Table.Row>
-                <Table.Cell>{rowData}</Table.Cell>
-                <Table.Cell>Approved</Table.Cell>
-              </Table.Row>
-            ))}
+            {state.displayedData
+              .filter((item, i, ar) => ar.indexOf(item) === i)
+              .map(rowData => (
+                <Table.Row>
+                  <Table.Cell>{rowData}</Table.Cell>
+                  <Table.Cell>
+                    {state.displayedData.filter(x => x === rowData).length}
+                  </Table.Cell>
+                </Table.Row>
+              ))}
           </Table.Body>
         </Table>
       )}
