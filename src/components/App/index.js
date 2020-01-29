@@ -24,7 +24,8 @@ function App() {
   const searchCall = searchTerm => {
     setState(prevState => ({
       ...prevState,
-      isSearching: true
+      isSearching: true,
+      isError: false
     }));
     return API.get(
       `/projects/${state.projectID}/pipelines?updated_after=${state.selectedDate}T00:00:00Z&order_by=updated_at&sort=asc`,
@@ -35,13 +36,7 @@ function App() {
       }
     )
       .then(res => {
-        setState(prevState => ({
-          ...prevState,
-          isError: false,
-          displayedData: res.data,
-          isSearching: false
-        }));
-        retriveJobs();
+        retriveJobs(res.data);
       })
       .catch(error => {
         setState(prevState => ({
@@ -65,7 +60,62 @@ function App() {
       }));
     }
   };
-  const retriveJobs = receivedPipelines => {};
+  const retriveJobs = receivedPipelines => {
+    let jobsCollection = [];
+    let callsCollection = [];
+    receivedPipelines.forEach(pipeline => {
+      callsCollection.push(
+        API.get(`/projects/${state.projectID}/pipelines/${pipeline.id}/jobs`, {
+          headers: {
+            "PRIVATE-TOKEN": state.apiKey
+          }
+        })
+          .then(res => {
+            res.data.forEach(job => {
+              jobsCollection.push(job.id);
+            });
+          })
+          .catch(error => {
+            console.log("Error retrieving pipeline jobs data");
+          })
+      );
+    });
+    Promise.all(callsCollection).then(() =>
+      retrieveAndProcessArtifacts(jobsCollection)
+    );
+  };
+  const retrieveAndProcessArtifacts = receivedJobs => {
+    let stepsContainer = [];
+    let callsCollection = [];
+    const regExp = /(?<=Failed Step: ).*?\n/g;
+    receivedJobs.forEach(jobId => {
+      callsCollection.push(
+        API.get(`/projects/${state.projectID}/jobs/${jobId}/trace`, {
+          headers: {
+            "PRIVATE-TOKEN": state.apiKey
+          }
+        })
+          .then(async res => {
+            const returnedSteps = res.data.match(regExp);
+            console.log(returnedSteps);
+            if (returnedSteps !== null) {
+              await stepsContainer.push(...returnedSteps);
+            }
+          })
+          .catch(error => {
+            console.log("Error retrieving trace from jobs");
+          })
+      );
+    });
+    Promise.all(callsCollection).then(() => {
+      setState(prevState => ({
+        ...prevState,
+        isError: false,
+        isSearching: false,
+        displayedData: stepsContainer
+      }));
+    });
+  };
   return (
     <Segment>
       <Segment inverted color="teal">
@@ -120,18 +170,12 @@ function App() {
           </Table.Header>
 
           <Table.Body>
-            <Table.Row>
-              <Table.Cell>John</Table.Cell>
-              <Table.Cell>Approved</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>Jamie</Table.Cell>
-              <Table.Cell>Approved</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>Jill</Table.Cell>
-              <Table.Cell>Denied</Table.Cell>
-            </Table.Row>
+            {state.displayedData.map(rowData => (
+              <Table.Row>
+                <Table.Cell>{rowData}</Table.Cell>
+                <Table.Cell>Approved</Table.Cell>
+              </Table.Row>
+            ))}
           </Table.Body>
         </Table>
       )}
