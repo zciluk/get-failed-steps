@@ -14,6 +14,7 @@
     "react-scripts": "3.3.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.2",
+    "serialize-javascript": "^2.1.2",
     "styled-components": "^5.0.0"
   },
   "scripts": {
@@ -39,7 +40,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://zciluk.github.io/get-failed-steps/app",
+  "homepage": "https://zciluk.github.io/get-failed-steps",
   "author": "kulicz",
   "devDependencies": {
     "gh-pages": "^2.2.0"

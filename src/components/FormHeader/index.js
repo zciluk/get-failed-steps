@@ -26,6 +26,7 @@ const FormHeader = ({
             <Input
               icon="key"
               name="apiKey"
+              type="password"
               value={apiKey}
               onChange={handleChange}
               placeholder="API key"
