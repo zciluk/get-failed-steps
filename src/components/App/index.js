@@ -17,7 +17,8 @@ function App() {
     isSearching: false,
     pipelinesNumber: null,
     jobsNumber: null,
-    testFailsNumber: null
+    testFailsNumber: null,
+    dateOfCheck: null
   });
   const searchCall = searchTerm => {
     setState(prevState => ({
@@ -26,7 +27,8 @@ function App() {
       isError: false,
       pipelinesNumber: null,
       jobsNumber: null,
-      testFailsNumber: null
+      testFailsNumber: null,
+      dateOfCheck: state.selectedDate
     }));
     let nextDayDate = new Date(state.selectedDate);
     nextDayDate.setDate(nextDayDate.getDate() + 1);
@@ -157,7 +159,7 @@ function App() {
         <GridColumn width="4">
           {!state.isError && state.pipelinesNumber !== null && (
             <Message>
-              <p>Check for date: {state.selectedDate} </p>
+              <p>Check for date: {state.dateOfCheck} </p>
               <p>Pipelines retrieved: {state.pipelinesNumber} </p>
               {state.jobsNumber !== null && (
                 <p> Jobs retrieved: {state.jobsNumber} </p>
