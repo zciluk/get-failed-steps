@@ -1,68 +1,35 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Failed steps retriever
 
-## Available Scripts
+A simple [CRA](https://github.com/facebook/create-react-appapp) that retrieves [Gauge's](https://gauge.org/) failed steps from [Gitlab's](https://gitlab.com/) pipeline into results table.
 
-In the project directory, you can run:
+## Problem
 
-### `yarn start`
+When running Gauge automated tests with parameter `max-retries`, sometimes flaky tests cannot be observed easily - for instance they fail two times per tests and happens to pass at last time.<br />
+On Gitlab runner we have only about failed tests, unless we dig into the logs.<br />
+This tools allows us to get info about possible flaky tests without digging into the logs of pipelines - and get summed up results of failed steps. We can then easily spot where are the weak spots of our automated tests.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Instruction
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+The builded app is uploaded to: https://zciluk.github.io/get-failed-steps/app/
+There we have three fields: <br />
+_projectID_ - which is gitlab's id of your project. Can be retrieved from API. If you want to pass projectId to not write it each time you can pass it via parameter `/app?projectId=xxxxx`<br />
+_apiKey_ - which can be personally generated [here](https://gitlab.com/profile/personal_access_tokens) - select `api` permission. _REMEMBER!_ Be careful with your key and do not compromise it<br />
+_date_ - by default set to Today's date. <br />
+Then click _Get results_ to retrieve data.
 
-### `yarn test`
+## How it works
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+It is combination of three API calls - at first it gets Pipelines for selected date, then it gets Jobs from these Pipelines and at the end it gets log trace for each job. <br />
+From logs the app extracts only Failed steps indicators.
 
-### `yarn build`
+## Limitations
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Pipelines API limits returned pipelines to 20, and allows to paginate it via Before and After date. Therefore only 20 pipelines can be returned for 1 day.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## TODOs and ideas
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+🚀 find a way to omit 20 pipelines limitation (requests for each hour?)
 
-### `yarn eject`
+🚀 add ability to download PDF with report
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+🚀 add ability to return results for more than 1 day (multiple requests)
