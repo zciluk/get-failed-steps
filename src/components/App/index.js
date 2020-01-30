@@ -7,10 +7,11 @@ import StepsTable from "../StepsTable";
 import FormHeader from "../FormHeader";
 
 function App() {
+  const urlParameters = new URLSearchParams(window.location.search);
   const [state, setState] = useState({
     displayedData: "",
     apiKey: process.env.REACT_APP_API_KEY,
-    projectID: process.env.REACT_APP_PROJECT_ID,
+    projectID: urlParameters.get("projectId"),
     isError: false,
     selectedDate: new Date().toISOString().substring(0, 10),
     isSearching: false,
