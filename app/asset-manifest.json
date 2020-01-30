@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.js": "zciluk.github.io/get-failed-steps/app/static/js/main.f4f064f0.chunk.js",
-    "main.js.map": "zciluk.github.io/get-failed-steps/app/static/js/main.f4f064f0.chunk.js.map",
-    "runtime-main.js": "zciluk.github.io/get-failed-steps/app/static/js/runtime-main.77885d16.js",
-    "runtime-main.js.map": "zciluk.github.io/get-failed-steps/app/static/js/runtime-main.77885d16.js.map",
-    "static/css/2.12736401.chunk.css": "zciluk.github.io/get-failed-steps/app/static/css/2.12736401.chunk.css",
-    "static/js/2.37a5095d.chunk.js": "zciluk.github.io/get-failed-steps/app/static/js/2.37a5095d.chunk.js",
-    "static/js/2.37a5095d.chunk.js.map": "zciluk.github.io/get-failed-steps/app/static/js/2.37a5095d.chunk.js.map",
-    "index.html": "zciluk.github.io/get-failed-steps/app/index.html",
-    "precache-manifest.693f153c298e9775e48c6ba52a752480.js": "zciluk.github.io/get-failed-steps/app/precache-manifest.693f153c298e9775e48c6ba52a752480.js",
-    "service-worker.js": "zciluk.github.io/get-failed-steps/app/service-worker.js",
-    "static/css/2.12736401.chunk.css.map": "zciluk.github.io/get-failed-steps/app/static/css/2.12736401.chunk.css.map",
-    "static/js/2.37a5095d.chunk.js.LICENSE": "zciluk.github.io/get-failed-steps/app/static/js/2.37a5095d.chunk.js.LICENSE",
-    "static/media/semantic.min.css": "zciluk.github.io/get-failed-steps/app/static/media/outline-icons.ef60a4f6.woff"
+    "main.js": "/get-failed-steps/app/static/js/main.10eab640.chunk.js",
+    "main.js.map": "/get-failed-steps/app/static/js/main.10eab640.chunk.js.map",
+    "runtime-main.js": "/get-failed-steps/app/static/js/runtime-main.ebf23984.js",
+    "runtime-main.js.map": "/get-failed-steps/app/static/js/runtime-main.ebf23984.js.map",
+    "static/css/2.16d85880.chunk.css": "/get-failed-steps/app/static/css/2.16d85880.chunk.css",
+    "static/js/2.9a9442ca.chunk.js": "/get-failed-steps/app/static/js/2.9a9442ca.chunk.js",
+    "static/js/2.9a9442ca.chunk.js.map": "/get-failed-steps/app/static/js/2.9a9442ca.chunk.js.map",
+    "index.html": "/get-failed-steps/app/index.html",
+    "precache-manifest.590681ba66272d34698f6a01c5a1e09c.js": "/get-failed-steps/app/precache-manifest.590681ba66272d34698f6a01c5a1e09c.js",
+    "service-worker.js": "/get-failed-steps/app/service-worker.js",
+    "static/css/2.16d85880.chunk.css.map": "/get-failed-steps/app/static/css/2.16d85880.chunk.css.map",
+    "static/js/2.9a9442ca.chunk.js.LICENSE": "/get-failed-steps/app/static/js/2.9a9442ca.chunk.js.LICENSE",
+    "static/media/semantic.min.css": "/get-failed-steps/app/static/media/outline-icons.ef60a4f6.woff"
   },
   "entrypoints": [
-    "static/js/runtime-main.77885d16.js",
-    "static/css/2.12736401.chunk.css",
-    "static/js/2.37a5095d.chunk.js",
-    "static/js/main.f4f064f0.chunk.js"
+    "static/js/runtime-main.ebf23984.js",
+    "static/css/2.16d85880.chunk.css",
+    "static/js/2.9a9442ca.chunk.js",
+    "static/js/main.10eab640.chunk.js"
   ]
 }

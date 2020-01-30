@@ -20,7 +20,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -37,6 +39,9 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "zciluk.github.io/get-failed-steps/app",
-  "author": "kulicz"
+  "homepage": "https://zciluk.github.io/get-failed-steps/app",
+  "author": "kulicz",
+  "devDependencies": {
+    "gh-pages": "^2.2.0"
+  }
 }
