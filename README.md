@@ -1,6 +1,6 @@
 # Failed steps retriever
 
-A simple [CRA](https://github.com/facebook/create-react-appapp) that retrieves [Gauge's](https://gauge.org/) failed steps from [Gitlab's](https://gitlab.com/) pipeline into results table.
+A simple [CRA](https://github.com/facebook/create-react-appapp) app that retrieves [Gauge's](https://gauge.org/) failed steps from [Gitlab's](https://gitlab.com/) pipeline into results table.
 
 ## Problem
 
