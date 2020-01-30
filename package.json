@@ -40,7 +40,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://zciluk.github.io/get-failed-steps",
+  "homepage": "https://zciluk.github.io/get-failed-steps/app",
   "author": "kulicz",
   "devDependencies": {
     "gh-pages": "^2.2.0"
