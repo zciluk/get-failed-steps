@@ -5,7 +5,7 @@ A simple [CRA](https://github.com/facebook/create-react-appapp) app that retriev
 ## Problem
 
 When running Gauge automated tests with parameter `max-retries`, sometimes flaky tests cannot be observed easily - for instance they fail two times per tests and happens to pass at last time.<br />
-On Gitlab runner we have only about failed tests, unless we dig into the logs.<br />
+On Gitlab runner we have info only about failed tests, unless we dig into the logs.<br />
 This tools allows us to get info about possible flaky tests without digging into the logs of pipelines - and get summed up results of failed steps. We can then easily spot where are the weak spots of our automated tests.
 
 ## Instruction
