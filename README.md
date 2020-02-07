@@ -15,6 +15,8 @@ There we have three fields: <br />
 _`projectID`_ - which is gitlab's id of your project. Can be retrieved from API. If you want to pass projectId to not write it each time you can pass it via parameter `/app?projectId=xxxxx`<br />
 _`apiKey`_ - which can be personally generated [here](https://gitlab.com/profile/personal_access_tokens) - select `api` permission. Your key in the app does not go anywhere beside Gitlab request and app state. _REMEMBER!_ Be careful with your key and do not compromise it<br />
 _`date`_ - by default set to Today's date. <br />
+_`from hour`_ - to filter results, by default set to 0:00. <br />
+_`till hour`_ - to filter results, by default set to 23:59. <br />
 Then click _Get results_ to retrieve data.
 
 ## How it works
@@ -28,7 +30,7 @@ Pipelines API limits returned pipelines to 20, and allows to paginate it via Bef
 
 ## TODOs and ideas
 
-🚀 find a way to omit 20 pipelines limitation (requests for each hour?)
+~~🚀 find a way to omit 20 pipelines limitation (requests for each hour?)~~
 
 🚀 add ability to download PDF with report
 
