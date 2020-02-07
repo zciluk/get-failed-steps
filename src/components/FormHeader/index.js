@@ -5,7 +5,9 @@ const FormHeader = ({
   apiKey,
   selectedDate,
   handleChange,
-  searchCall
+  searchCall,
+  startHour,
+  endHour
 }) => {
   return (
     <Segment inverted color="teal">
@@ -47,14 +49,37 @@ const FormHeader = ({
             />
           </GridColumn>
         </Grid.Row>
-        <Grid.Row columns="2">
+        <Grid.Row columns="3">
           <GridColumn>
             {}
             <Button onClick={searchCall} color="black">
               Get results
             </Button>
           </GridColumn>
-          <GridColumn></GridColumn>
+          <GridColumn>
+            <Input
+              icon="clock"
+              name="startHour"
+              value={startHour}
+              onChange={handleChange}
+              placeholder="From hour"
+              label={{ basic: true, content: "From hour" }}
+              labelPosition="left"
+              type="time"
+            />
+          </GridColumn>
+          <GridColumn>
+            <Input
+              icon="clock"
+              name="endHour"
+              value={endHour}
+              onChange={handleChange}
+              placeholder="Till hour"
+              label={{ basic: true, content: "Till hour" }}
+              labelPosition="left"
+              type="time"
+            />
+          </GridColumn>
         </Grid.Row>
       </Grid>
     </Segment>

@@ -18,7 +18,9 @@ function App() {
     pipelinesNumber: null,
     jobsNumber: null,
     testFailsNumber: null,
-    dateOfCheck: null
+    dateOfCheck: null,
+    startHour: "00:00",
+    endHour: "23:59"
   });
   const searchCall = searchTerm => {
     setState(prevState => ({
@@ -33,7 +35,7 @@ function App() {
     let nextDayDate = new Date(state.selectedDate);
     nextDayDate.setDate(nextDayDate.getDate() + 1);
     return API.get(
-      `/projects/${state.projectID}/pipelines?updated_after=${state.selectedDate}T00:00:00Z&order_by=updated_at&sort=asc&updated_before=${nextDayDate}T00:00:00Z`,
+      `/projects/${state.projectID}/pipelines?updated_after=${state.selectedDate}T${state.startHour}:00Z&order_by=updated_at&sort=asc&updated_before=${nextDayDate}T${state.endHour}:00Z`,
       {
         headers: {
           "PRIVATE-TOKEN": state.apiKey
@@ -138,6 +140,8 @@ function App() {
         selectedDate={state.selectedDate}
         handleChange={handleChange}
         searchCall={searchCall}
+        startHour={state.startHour}
+        endHour={state.endHour}
       ></FormHeader>
       <Grid columns="equal">
         <GridColumn width="8">
