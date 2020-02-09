@@ -112,7 +112,6 @@ function App() {
         })
           .then(async res => {
             const returnedSteps = res.data.match(regExp);
-            console.log(returnedSteps);
             if (returnedSteps !== null) {
               await stepsContainer.push(...returnedSteps);
             }
