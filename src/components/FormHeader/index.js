@@ -22,6 +22,7 @@ const FormHeader = ({
               placeholder="Project ID"
               label={{ basic: true, content: "Project ID" }}
               labelPosition="left"
+              type="number"
             />
           </GridColumn>
           <GridColumn>
@@ -34,6 +35,8 @@ const FormHeader = ({
               placeholder="API key"
               label={{ basic: true, content: "API key" }}
               labelPosition="left"
+              inputProps={{ "data-testid": "apiKey" }}
+              data-testid="apiKey"
             />
           </GridColumn>
           <GridColumn>

@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render table with mocked data 1`] = `
+<table
+  className="ui teal collapsing table"
+>
+  <thead
+    className=""
+  >
+    <tr
+      className=""
+    >
+      <th
+        className=""
+      >
+        Name of test
+      </th>
+      <th
+        className=""
+      >
+        Number of Fails
+      </th>
+    </tr>
+  </thead>
+  <tbody
+    className=""
+  >
+    <tr
+      className=""
+    >
+      <td
+        className=""
+      >
+        Step 1
+      </td>
+      <td
+        className=""
+      >
+        3
+      </td>
+    </tr>
+    <tr
+      className=""
+    >
+      <td
+        className=""
+      >
+        Step2
+      </td>
+      <td
+        className=""
+      >
+        1
+      </td>
+    </tr>
+    <tr
+      className=""
+    >
+      <td
+        className=""
+      >
+        Step other
+      </td>
+      <td
+        className=""
+      >
+        1
+      </td>
+    </tr>
+    <tr
+      className=""
+    >
+      <td
+        className=""
+      >
+        Step4
+      </td>
+      <td
+        className=""
+      >
+        1
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
