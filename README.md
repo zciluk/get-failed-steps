@@ -35,3 +35,5 @@ Pipelines API limits returned pipelines to 20, and allows to paginate it via Bef
 🚀 add ability to download PDF with report
 
 🚀 add ability to return results for more than 1 day (multiple requests)
+
+🚀 add unit tests (40% done)
