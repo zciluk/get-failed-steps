@@ -5,13 +5,18 @@ import API from "../../apis";
 import Spinner from "../Spinner";
 import StepsTable from "../StepsTable";
 import FormHeader from "../FormHeader";
-
+import { errorStrings } from "../../data/errorStrings";
 function App() {
   const urlParameters = new URLSearchParams(window.location.search);
   const [state, setState] = useState({
     displayedData: "",
     apiKey: process.env.REACT_APP_API_KEY,
-    projectID: urlParameters.get("projectId"),
+    projectID:
+      process.env.REACT_APP_PROJECT_ID === null
+        ? urlParameters.get("projectId") === null
+          ? ""
+          : urlParameters.get("projectId")
+        : process.env.REACT_APP_PROJECT_ID,
     isError: false,
     selectedDate: new Date().toISOString().substring(0, 10),
     isSearching: false,
@@ -22,6 +27,7 @@ function App() {
     startHour: "00:00",
     endHour: "23:59"
   });
+
   const searchCall = searchTerm => {
     setState(prevState => ({
       ...prevState,
@@ -87,7 +93,7 @@ function App() {
             });
           })
           .catch(error => {
-            console.log("Error retrieving pipeline jobs data");
+            console.log(errorStrings.getPipelineError);
           })
       );
     });
@@ -112,13 +118,12 @@ function App() {
         })
           .then(async res => {
             const returnedSteps = res.data.match(regExp);
-            console.log(returnedSteps);
             if (returnedSteps !== null) {
               await stepsContainer.push(...returnedSteps);
             }
           })
           .catch(error => {
-            console.log("Error retrieving trace from jobs");
+            console.log(errorStrings.getTraceError);
           })
       );
     });
@@ -152,9 +157,8 @@ function App() {
             )}
           {state.isError && (
             <Message negative>
-              <Message.Header>
-                There was an error while doing API request. Check if API
-                key/Project ID is correct.
+              <Message.Header data-testid="messageBox">
+                {errorStrings.getResultsError}
               </Message.Header>
             </Message>
           )}

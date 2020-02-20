@@ -15,7 +15,7 @@ const StepsTable = ({ displayedData }) => {
         {displayedData
           .filter((item, i, ar) => ar.indexOf(item) === i)
           .map(rowData => (
-            <Table.Row>
+            <Table.Row key={rowData}>
               <Table.Cell>{rowData}</Table.Cell>
               <Table.Cell>
                 {displayedData.filter(x => x === rowData).length}

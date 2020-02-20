@@ -22,6 +22,7 @@ const FormHeader = ({
               placeholder="Project ID"
               label={{ basic: true, content: "Project ID" }}
               labelPosition="left"
+              type="number"
             />
           </GridColumn>
           <GridColumn>
