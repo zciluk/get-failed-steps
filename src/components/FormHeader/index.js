@@ -35,8 +35,6 @@ const FormHeader = ({
               placeholder="API key"
               label={{ basic: true, content: "API key" }}
               labelPosition="left"
-              inputProps={{ "data-testid": "apiKey" }}
-              data-testid="apiKey"
             />
           </GridColumn>
           <GridColumn>

@@ -27,6 +27,7 @@ function App() {
     startHour: "00:00",
     endHour: "23:59"
   });
+
   const searchCall = searchTerm => {
     setState(prevState => ({
       ...prevState,

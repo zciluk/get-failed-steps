@@ -1,20 +1,30 @@
 import React from "react";
 import { errorStrings } from "../../data/errorStrings.js";
+import { render, fireEvent, waitForElement } from "@testing-library/react";
 import App from "../App";
-import {
-  render,
-  fireEvent,
-  waitForElement,
-  getByTestId
-} from "@testing-library/react";
-import { Simulate } from "react-dom/test-utils";
-import userEvent from "@testing-library/user-event";
-test("should return error when called with empty fields", async () => {
-  const { getByText, getByTestId } = render(<App />);
-  const input = getByTestId("apiKey");
-  input.value = "xddd";
-  Simulate.change(input);
-  fireEvent.click(getByText("Get results"));
-  const messageBox = await waitForElement(() => getByTestId("messageBox"));
+
+test("should return error when called with empty API key", async () => {
+  const component = render(<App />);
+  fireEvent.change(component.getByPlaceholderText("API key"), {
+    target: { value: "" }
+  });
+  fireEvent.click(component.getByText("Get results"));
+  const messageBox = await waitForElement(() =>
+    component.getByTestId("messageBox")
+  );
   expect(messageBox.textContent).toBe(errorStrings.getResultsError);
 });
+
+test("should return error when called with empty projet ID", async () => {
+  const component = render(<App />);
+  fireEvent.change(component.getByPlaceholderText("Project ID"), {
+    target: { value: "1" }
+  });
+  fireEvent.click(component.getByText("Get results"));
+  const messageBox = await waitForElement(() =>
+    component.getByTestId("messageBox")
+  );
+  expect(messageBox.textContent).toBe(errorStrings.getResultsError);
+});
+
+// add test with filled records
