@@ -1,7 +1,8 @@
 import React from "react";
 import { Table } from "semantic-ui-react";
+import _ from "lodash";
 
-const StepsTable = ({ displayedData }) => {
+const StepsTable = ({ retrievedData }) => {
   return (
     <Table collapsing color="teal">
       <Table.Header>
@@ -12,14 +13,12 @@ const StepsTable = ({ displayedData }) => {
       </Table.Header>
 
       <Table.Body>
-        {displayedData
-          .filter((item, i, ar) => ar.indexOf(item) === i)
+        {_.sortBy(retrievedData, ["fail"])
+          .reverse()
           .map(rowData => (
-            <Table.Row key={rowData}>
-              <Table.Cell>{rowData}</Table.Cell>
-              <Table.Cell>
-                {displayedData.filter(x => x === rowData).length}
-              </Table.Cell>
+            <Table.Row key={rowData.test}>
+              <Table.Cell>{rowData.test}</Table.Cell>
+              <Table.Cell>{rowData.fail}</Table.Cell>
             </Table.Row>
           ))}
       </Table.Body>

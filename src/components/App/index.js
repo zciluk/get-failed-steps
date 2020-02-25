@@ -137,6 +137,16 @@ function App() {
       }));
     });
   };
+  const passData = data => {
+    return data
+      .filter((item, i, ar) => ar.indexOf(item) === i)
+      .map(rowData => {
+        return {
+          test: rowData,
+          fail: data.filter(x => x === rowData).length
+        };
+      });
+  };
   return (
     <Segment>
       <FormHeader
@@ -153,7 +163,9 @@ function App() {
           {!state.isError &&
             !state.isSearching &&
             state.displayedData.length !== 0 && (
-              <StepsTable displayedData={state.displayedData}></StepsTable>
+              <StepsTable
+                retrievedData={passData(state.displayedData)}
+              ></StepsTable>
             )}
           {state.isError && (
             <Message negative>
