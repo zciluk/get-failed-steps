@@ -24,63 +24,6 @@ exports[`should render table with mocked data 1`] = `
   </thead>
   <tbody
     className=""
-  >
-    <tr
-      className=""
-    >
-      <td
-        className=""
-      >
-        Step 1
-      </td>
-      <td
-        className=""
-      >
-        3
-      </td>
-    </tr>
-    <tr
-      className=""
-    >
-      <td
-        className=""
-      >
-        Step2
-      </td>
-      <td
-        className=""
-      >
-        1
-      </td>
-    </tr>
-    <tr
-      className=""
-    >
-      <td
-        className=""
-      >
-        Step other
-      </td>
-      <td
-        className=""
-      >
-        1
-      </td>
-    </tr>
-    <tr
-      className=""
-    >
-      <td
-        className=""
-      >
-        Step4
-      </td>
-      <td
-        className=""
-      >
-        1
-      </td>
-    </tr>
-  </tbody>
+  />
 </table>
 `;
