@@ -10,6 +10,7 @@ function App() {
   const urlParameters = new URLSearchParams(window.location.search);
   const [state, setState] = useState({
     displayedData: "",
+    specsData: "",
     apiKey: process.env.REACT_APP_API_KEY,
     projectID:
       process.env.REACT_APP_PROJECT_ID === null
@@ -108,7 +109,9 @@ function App() {
   const retrieveAndProcessArtifacts = receivedJobs => {
     let stepsContainer = [];
     let callsCollection = [];
-    const regExp = /(?<=Failed Step: ).*?\n/g;
+    let specsContainer = [];
+    const failedRegExp = /(?<=Failed Step: ).*?\n/g;
+    const specsRegExp = /(?<=Specification: ).*?\n/g;
     receivedJobs.forEach(jobId => {
       callsCollection.push(
         API.get(`/projects/${state.projectID}/jobs/${jobId}/trace`, {
@@ -117,9 +120,13 @@ function App() {
           }
         })
           .then(async res => {
-            const returnedSteps = res.data.match(regExp);
+            const returnedSteps = res.data.match(failedRegExp);
             if (returnedSteps !== null) {
               await stepsContainer.push(...returnedSteps);
+            }
+            const returnedSpecs = res.data.match(specsRegExp);
+            if (returnedSpecs !== null) {
+              await specsContainer.push(...returnedSpecs);
             }
           })
           .catch(error => {
@@ -133,17 +140,18 @@ function App() {
         isError: false,
         isSearching: false,
         displayedData: stepsContainer,
-        testFailsNumber: stepsContainer.length
+        testFailsNumber: stepsContainer.length,
+        specsData: specsContainer
       }));
     });
   };
-  const passData = data => {
-    return data
+  const passData = (failsData, specsData) => {
+    return failsData
       .filter((item, i, ar) => ar.indexOf(item) === i)
-      .map(rowData => {
+      .map((rowData, i) => {
         return {
           test: rowData,
-          fail: data.filter(x => x === rowData).length
+          fail: failsData.filter(x => x === rowData).length
         };
       });
   };
@@ -164,7 +172,7 @@ function App() {
             !state.isSearching &&
             state.displayedData.length !== 0 && (
               <StepsTable
-                retrievedData={passData(state.displayedData)}
+                retrievedData={passData(state.displayedData, state.specsData)}
               ></StepsTable>
             )}
           {state.isError && (
