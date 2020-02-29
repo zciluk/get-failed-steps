@@ -123,10 +123,8 @@ function App() {
             const returnedSteps = res.data.match(failedRegExp);
             if (returnedSteps !== null) {
               await stepsContainer.push(...returnedSteps);
-            }
-            const returnedSpecs = res.data.match(specsRegExp);
-            if (returnedSpecs !== null) {
-              await specsContainer.push(...returnedSpecs);
+              const returnedSpecs = res.data.match(specsRegExp);
+              specsContainer.push(...returnedSpecs);
             }
           })
           .catch(error => {
@@ -141,14 +139,17 @@ function App() {
         isSearching: false,
         displayedData: stepsContainer,
         testFailsNumber: stepsContainer.length,
-        specsData: specsContainer
+        specsData: stepsContainer.map(function(x, i) {
+          return [x, specsContainer[i]];
+        })
       }));
+      console.log(state.specsData);
     });
   };
-  const passData = (failsData, specsData) => {
+  const passData = failsData => {
     return failsData
       .filter((item, i, ar) => ar.indexOf(item) === i)
-      .map((rowData, i) => {
+      .map(rowData => {
         return {
           test: rowData,
           fail: failsData.filter(x => x === rowData).length
@@ -173,6 +174,7 @@ function App() {
             state.displayedData.length !== 0 && (
               <StepsTable
                 retrievedData={passData(state.displayedData, state.specsData)}
+                specsData={state.specsData}
               ></StepsTable>
             )}
           {state.isError && (
