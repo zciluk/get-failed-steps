@@ -1,5 +1,5 @@
 import React from "react";
-import { Table } from "semantic-ui-react";
+import { Table, Popup, Label } from "semantic-ui-react";
 import _ from "lodash";
 
 const StepsTable = ({ retrievedData, specsData }) => {
@@ -8,7 +8,6 @@ const StepsTable = ({ retrievedData, specsData }) => {
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>Name of test</Table.HeaderCell>
-          <Table.HeaderCell>Specs</Table.HeaderCell>
           <Table.HeaderCell>Number of Fails</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
@@ -18,13 +17,16 @@ const StepsTable = ({ retrievedData, specsData }) => {
           .reverse()
           .map(rowData => (
             <Table.Row key={rowData.test}>
-              <Table.Cell>{rowData.test}</Table.Cell>
               <Table.Cell>
-                {specsData
-                  .map(elem => {
-                    if (elem[0] === rowData.test) return elem[1];
-                  })
-                  .filter((item, i, ar) => ar.indexOf(item) === i)}
+                <Popup
+                  trigger={<Label basic>{rowData.test}</Label>}
+                  content={specsData
+                    .map(elem => {
+                      if (elem[0] === rowData.test) return elem[1];
+                    })
+                    .filter((item, i, ar) => ar.indexOf(item) === i)}
+                  inverted
+                />
               </Table.Cell>
               <Table.Cell>{rowData.fail}</Table.Cell>
             </Table.Row>
