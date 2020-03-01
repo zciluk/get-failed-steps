@@ -23,6 +23,7 @@ const StepsTable = ({ retrievedData, specsData }) => {
                   content={specsData
                     .map(elem => {
                       if (elem[0] === rowData.test) return elem[1];
+                      return "";
                     })
                     .filter((item, i, ar) => ar.indexOf(item) === i)}
                   inverted
